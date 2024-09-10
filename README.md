@@ -26,7 +26,7 @@ Este proyecto es un juego desarrollado en Unity y exportado para WebGL. El objet
    - Asegúrate de que todos los elementos UI dentro del Canvas tengan sus **RectTransforms** configurados correctamente.
    - Utiliza anclajes para que los elementos se posicionen y escalen adecuadamente en relación con el Canvas.
 
-### Ejecución del Proyecto
+## Ejecución del Proyecto
 Abre el archivo index.html en un navegador web.
 Asegúrate de que el Canvas mantenga la relación de aspecto de 1920x1080 y que los elementos de la escena se escalen correctamente.
 
