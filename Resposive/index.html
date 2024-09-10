@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Melvyn | {{{ PRODUCT_NAME }}}</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #canvasContainer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 100vh;
+      transform: translate(-50%, -50%);
+    }
+
+    #unity-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #231F20;
+    }
+  </style>
+</head>
+
+<body style="text-align: center; padding: 0; border: 0; margin: 0; background-color: #231F20;">
+  <div id="canvasContainer">
+    <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1"></canvas>
+  </div>
+  <script src="Build/{{{ LOADER_FILENAME }}}"></script>
+  <script>
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      var meta = document.createElement('meta');
+      meta.name = 'viewport';
+      meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+      document.getElementsByTagName('head')[0].appendChild(meta);
+      document.body.style.textAlign = "left";
+    }
+
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+      dataUrl: "Build/{{{ DATA_FILENAME }}}",
+      frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
+      #if USE_THREADS
+        workerUrl: "Build/{{{ WORKER_FILENAME }}}",
+      #endif
+#if USE_WASM
+        codeUrl: "Build/{{{ CODE_FILENAME }}}",
+      #endif
+#if MEMORY_FILENAME
+        memoryUrl: "Build/{{{ MEMORY_FILENAME }}}",
+      #endif
+#if SYMBOLS_FILENAME
+        symbolsUrl: "Build/{{{ SYMBOLS_FILENAME }}}",
+      #endif
+        streamingAssetsUrl: "StreamingAssets",
+      companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
+      productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
+      productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+      });
+  </script>
+
+  <script>
+    function ResizeCanvas() {
+      var canvas = document.getElementById("unity-canvas");
+
+      // RESOLUCION
+      var targetWidth = 1920;
+      var targetHeight = 1080;
+
+      var windowWidth = window.innerWidth;
+      var windowHeight = window.innerHeight;
+      // Relacion?
+      var aspectRatio = targetWidth / targetHeight;
+
+      // Poner resultado
+      if (windowWidth / windowHeight < aspectRatio) {
+        canvas.style.width = windowWidth + "px";
+        canvas.style.height = (windowWidth / aspectRatio) + "px";
+      } else {
+        canvas.style.height = windowHeight + "px";
+        canvas.style.width = (windowHeight * aspectRatio) + "px";
+      }
+
+      // Centrar
+      canvas.style.position = "absolute";
+      canvas.style.top = (windowHeight - parseFloat(canvas.style.height)) / 2 + "px";
+      canvas.style.left = (windowWidth - parseFloat(canvas.style.width)) / 2 + "px";
+    }
+
+    //LLamadas....
+    window.onload = ResizeCanvas;
+    window.onresize = ResizeCanvas;
+  </script>
+</body>
+<link rel="stylesheet" href="style.css">
+
+</html>
