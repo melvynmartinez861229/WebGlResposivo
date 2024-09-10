@@ -1,8 +1,8 @@
-# Proyecto Unity WebGL - [Nombre del Proyecto]
+# Proyecto Unity WebGL - Responsive
 
 ## Descripción
 
-Este proyecto es un juego desarrollado en Unity y exportado para WebGL. El objetivo es proporcionar una experiencia de usuario fluida y responsiva, manteniendo la relación de aspecto de 1920x1080 (Full HD) sin importar el tamaño de la ventana del navegador. Este README proporciona instrucciones sobre cómo configurar y ejecutar el proyecto.
+Este proyecto es plantilla WebGL para Unity. El objetivo es proporcionar una experiencia de usuario fluida y responsiva, manteniendo la relación de aspecto de 1920x1080 (Full HD) sin importar el tamaño de la ventana del navegador. Este README proporciona instrucciones sobre cómo configurar y ejecutar el proyecto.
 
 ## Requisitos
 
